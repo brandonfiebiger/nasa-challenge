@@ -1,7 +1,9 @@
 <template>
   <div class="hello">
     <h1>Nasa Pics!</h1>
-    <img v-bind:src="message"/>
+    <img v-bind:src="selectedPhoto"/>
+    <button v-on:click="todayToggle">Today's Photo</button>
+    <button v-on:click="yesterdayToggle">Yesterday's Photo</button>
   </div>
 </template>
 
@@ -20,19 +22,34 @@ export default {
   },
   data() {
     return {
-      message: '',
-      yesterdayPhoto: ''
+      todaysPhoto: '',
+      yesterdaysPhoto: '',
+      selectedPhoto: ''
+    }
+  },
+  methods: {
+    todayToggle: function() {
+      this.selectedPhoto = this.todaysPhoto;
+    },
+    yesterdayToggle: function() {
+      this.selectedPhoto = this.yesterdaysPhoto;
     }
   },
   created: function() {
     fetch(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}`)
     .then(response => response.json())
-    .then(image => this.message = image.url)
+    .then(image => {
+      this.todaysPhoto = image.url;
+    })
     .catch(error => console.log(error))
     
     fetch(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}&date=${yesterday}`)
-      .then(response => response.json())
-      .then(image => this.yesterdayPhoto = image.url)
+    .then(response => response.json())
+    .then(image => {
+      this.selectedPhoto = image.url;
+        this.yesterdaysPhoto = image.url
+        console.log(image.url)
+      })
       .catch(error => console.log(error))
   }
 }
