@@ -6,8 +6,13 @@
 </template>
 
 <script>
-  import { apiKey } from '../../keys/keys.js'
-  
+import { apiKey } from '../../keys/keys.js';
+import date from 'date-and-time';
+
+let now = new Date();
+let yesterday = date.addDays(now, -1);
+yesterday = date.format(yesterday, 'YYYY-MM-DD');
+console.log(yesterday);
 export default {
   name: 'HelloWorld',
   props: {
@@ -15,13 +20,19 @@ export default {
   },
   data() {
     return {
-      message: ''
+      message: '',
+      yesterdayPhoto: ''
     }
   },
   created: function() {
     fetch(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}`)
+    .then(response => response.json())
+    .then(image => this.message = image.url)
+    .catch(error => console.log(error))
+    
+    fetch(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}&date=${yesterday}`)
       .then(response => response.json())
-      .then(image => this.message = image.url)
+      .then(image => this.yesterdayPhoto = image.url)
       .catch(error => console.log(error))
   }
 }
