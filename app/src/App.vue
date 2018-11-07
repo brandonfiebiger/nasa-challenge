@@ -1,18 +1,16 @@
 <template>
   <div id="app">
-    <HelloWorld msg="hello"/>
+    <Picture />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue';
-import { apiKey } from '../keys/keys.js';
-
+import Picture from './components/Picture.vue';
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    Picture
   }
 }
 
@@ -26,5 +24,8 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  background-image: url('https://d2r55xnwy6nx47.cloudfront.net/uploads/2018/08/TidalDisruptions_A_1440x810.gif');
+  background-size: cover;
+  background-repeat:  no-repeat;
 }
 </style>

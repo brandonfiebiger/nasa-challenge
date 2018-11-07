@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HelloWorld should exist 1`] = `
+<div class="hello">
+  <h1>Nasa Pics!</h1> <img src=""> <button>Today's Photo</button> <button>Yesterday's Photo</button>
+</div>
+`;
+
+exports[`HelloWorld should match the snapshot 1`] = `
+<div class="hello">
+  <h1>Nasa Pics!</h1> <img src=""> <button>Today's Photo</button> <button>Yesterday's Photo</button>
+</div>
+`;
